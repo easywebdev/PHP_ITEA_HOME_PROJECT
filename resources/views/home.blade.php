@@ -1,9 +1,50 @@
+<?php
+    var_dump(session()->all());
+?>
+
 @extends('layouts.app')
 
 @section('content')
+
+<div class="navbar navbar-laravel">
+    <div class="container">
+        <div class="navbar-brand">
+            {{$user['first_name']}}&nbsp;{{$user['last_name']}}
+            @if($roleName == 'parent')
+                parent of ({{session('childFirstName')}} &nbsp; {{session('childLastName')}})
+            @endif
+        </div>
+        <div class="nav-item">
+            {{$roleName}}
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+
+        <div class="col-md-2">
+            <div class="card-header">
+                Menu
+            </div>
+            <div class="card">
+                @foreach($userMenu as $key => $value)
+                    <div>
+                        @if($key == 'statistic')
+                            @if(session()->has('childID'))
+                                <a href="{{$key}}/{{session('childID')}}">{{$value}}</a>
+                            @else
+                                <a href="{{$key}}/{{session('userID')}}">{{$value}}</a>
+                            @endif
+                        @else
+                            <a href="{{$key}}">{{$value}}</a>
+                        @endif
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">Dashboard</div>
 
@@ -16,6 +57,11 @@
 
                     You are logged in!
                 </div>
+
+                <div class="card-body">
+                    @yield('action')
+                </div>
+
             </div>
         </div>
     </div>

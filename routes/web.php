@@ -18,7 +18,34 @@
 Route::get('test', 'TestController@testView');
 
 
-Route::get('/', 'Home\HomeController@getShedule');
-Auth::routes();
+// Home Page
+Route::get('/', 'Home\HomeController@showShedule');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Authorization
+//Auth::routes();
+Route::get('/home', 'Users\HomeController@index')->name('home');
+
+Route::get('login','Auth\LoginController@showLoginForm')->name('login');
+Route::post('login','Auth\LoginController@login');
+Route::post('logout','Auth\LoginController@logout')->name('logout');
+Route::post('password/email','Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset','Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/reset','Auth\ResetPasswordController@reset');
+Route::get('password/reset/{token}','Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::get('register','Users\RegisterController@showRegistrationForm')->name('register');
+Route::post('register','Users\RegisterController@register');
+
+// Shedule
+Route::get('shedule', 'Shedule\SheduleController@getShedule');
+
+// Stat
+Route::get('statistic/{id}', 'Stat\StatController@showUserStat')->middleware('stat_user');
+
+// Request
+Route::get('request', 'Request\RequestController@showSelectTeacherForm');
+
+// No Permission Page
+Route::get('NoPermission', function () { return view('NoPermission'); });
+
+// Test
+

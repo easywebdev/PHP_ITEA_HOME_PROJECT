@@ -40,13 +40,18 @@
                         </div>
 
                         <?php
-                        var_dump($roles);
+                        //var_dump($roles);
+                        foreach ($roles as $role) {
+                            echo $role['name'];
+                        }
                         ?>
                         <div class="form-group row">
                             <label for="roles_id" class="col-md-4 col-form-label text-md-right">{{__('Role')}}</label>
-                            <div class="col-md-6">
-                                <input id="roles_id" type="text" class="form-control{{ $errors->has('roles_id') ? ' is-invalid' : '' }}" name="roles_id" value="1">
-                            </div>
+                            <select id="roles_id" name="roles_id">
+                                @foreach($roles as $role)
+                                    <option value="{{$role['id']}}">{{$role['name']}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="form-group row">

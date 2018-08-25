@@ -1,13 +1,25 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: fedor
+ * Date: 18.08.18
+ * Time: 18:28
+ */
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Users;
 
+use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\View\View;
 
+/**
+ * Class RegisterController
+ * @package App\Http\Controllers\Users
+ */
 class RegisterController extends Controller
 {
     /*
@@ -51,7 +63,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'first_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:3|confirmed',
         ]);
     }
 
@@ -72,12 +84,20 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function showRegistrationForm()
+    /**
+     * @return Role[]|\Illuminate\Database\Eloquent\Collection
+     */
+    protected function getRoles()
     {
-        $hh = $this->getRoles();
-        $gg = $this->getModel();
+        return Role::all();
+    }
 
-        $roles = [];
+    /**
+     * @return View
+     */
+    public function showRegistrationForm() : View
+    {
+        $roles = $this->getRoles();
 
         return view('auth.register', [
             'roles' => $roles
