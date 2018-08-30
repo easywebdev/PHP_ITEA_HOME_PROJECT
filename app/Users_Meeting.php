@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: fedor
- * Date: 24.08.18
- * Time: 19:39
+ * Date: 26.08.18
+ * Time: 12:58
  */
 
 namespace App;
@@ -12,21 +12,16 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Stat extends Model
+class Users_Meeting extends Model
 {
-    /**
-     *
-     */
     use Notifiable;
 
-    /**
-     * @var array
-     */
+    protected $table = 'users_meetings';
+    public $timestamps = false;
+    public $incrementing = false;
+
     protected $fillable = [
-        'rating',
-        'lessons_id',
         'users_id',
-        'created_at',
-        'updated_at',
+        'meetings_id',
     ];
 }

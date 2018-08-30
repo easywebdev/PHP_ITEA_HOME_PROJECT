@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: fedor
- * Date: 24.08.18
- * Time: 18:55
+ * Date: 26.08.18
+ * Time: 12:55
  */
 
 namespace App;
@@ -12,20 +12,19 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-/**
- * Class Lesson
- * @package App
- */
-class Lesson extends Model
+class Meeting extends Model
 {
     use Notifiable;
 
-    /**
-     * @var array
-     */
     protected $fillable = [
         'name',
+        'topic',
         'created_at',
-        'updated_at',
+        'teacher_id',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'users_meetings', 'meetings_id', 'users_id');
+    }
 }

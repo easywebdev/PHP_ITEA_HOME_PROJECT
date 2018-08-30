@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: fedor
- * Date: 24.08.18
- * Time: 19:01
- */
 
 namespace App\Http\Controllers\Stat;
 
@@ -15,6 +9,9 @@ use App\Stat;
 
 class StatController extends Controller
 {
+    /**
+     * @return array
+     */
     private function getLessons()
     {
         $arrLessons = [];
@@ -27,6 +24,11 @@ class StatController extends Controller
         return $arrLessons;
     }
 
+    /**
+     * @param array $lessons
+     * @param int $userID
+     * @return array
+     */
     private function getUserStat(array $lessons, int $userID)
     {
         $stats = [];
@@ -49,6 +51,10 @@ class StatController extends Controller
         return $stats;
     }
 
+    /**
+     * @param $userID
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showUserStat($userID)
     {
         $lessons = $this->getLessons();

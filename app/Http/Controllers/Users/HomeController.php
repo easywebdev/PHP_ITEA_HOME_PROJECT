@@ -38,7 +38,8 @@ class HomeController extends HC
     private function setSessionData(int $userID, string $roleName) : void
     {
         session([
-            'userID' => $userID
+            'userID' => $userID,
+            'role' => $roleName,
         ]);
 
         if($roleName == 'parent') {

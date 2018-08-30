@@ -10,12 +10,29 @@ namespace App\Http\Controllers\Request;
 
 
 use App\Http\Controllers\Controller;
+use App\Meeting;
 use App\Role;
 use App\User;
+use App\Users_Meeting;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class RequestController extends Controller
 {
+
+    use PostProcessing;
+
+    /**
+     * @param Request $request
+     */
+    private function validatePost(Request $request)
+    {
+        $this->validate($request, [
+            'name'  => 'required',
+            'topic' => 'required',
+        ]);
+    }
+
     /**
      * @return int
      */
@@ -47,6 +64,9 @@ class RequestController extends Controller
         return $teachers;
     }
 
+    /**
+     * @return View
+     */
     public function showSelectTeacherForm() : View
     {
         $roleID = $this->findTeacherRoleID();
@@ -55,6 +75,51 @@ class RequestController extends Controller
 
         return View('SelectTeacherForm', [
             'teachers' => $teachers
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function addRequest(Request $request) : void
+    {
+        $this->validatePost($request);
+
+        $post = $this->escapeTags($request->post());
+
+        $model = Meeting::create($post);
+        $meetings_id = $model->id;
+
+        Users_Meeting::create([
+            'users_id'    => session('userID'),
+            'meetings_id' => $meetings_id,
+        ]);
+
+        echo 'Post ADD';
+    }
+
+    public function showRequests()
+    {
+        $arrMeetings = [];
+
+        $user = User::find(session('userID'));
+        $meetings = $user->meetings->toArray();
+
+        foreach ($meetings as $meeting) {
+
+            unset($meeting['pivot']);
+
+            $arrMeetings[$meeting['name']] = $meeting;
+
+            $teachers = User::where('id', $meeting['teacher_id'])->get();
+
+            foreach ($teachers as $teacher) {
+                $arrMeetings[$meeting['name']]['teacher'] = $teacher->first_name;
+            }
+        }
+
+        return View('ShowParentRequests', [
+            'meetings' => $arrMeetings,
         ]);
     }
 }

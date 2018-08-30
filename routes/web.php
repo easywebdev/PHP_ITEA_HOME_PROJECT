@@ -40,12 +40,25 @@ Route::get('shedule', 'Shedule\SheduleController@getShedule');
 
 // Stat
 Route::get('statistic/{id}', 'Stat\StatController@showUserStat')->middleware('stat_user');
+Route::get('editstatistic', 'Stat\TeacherStatController@showTeacherStatForm')->middleware('is_teacher');
+Route::post('editstatistic', 'Stat\TeacherStatController@redirectStatForm')->middleware('is_teacher');
+Route::get('updatestatistic/student/{studentID}/lesson/{lessonID}', 'Stat\TeacherStatController@showEditStatForm')->middleware('is_teacher');
+Route::post('updatestatistic/student/{studentID}/lesson/{lessonID}', 'Stat\TeacherStatController@updateStat')->middleware('is_teacher');
+Route::get('updatestatistic/student/{studentID}/lesson/{lessonID}/addstatistic', 'Stat\TeacherStatController@showAddStatForm')->middleware('is_teacher');
+Route::post('updatestatistic/student/{studentID}/lesson/{lessonID}/addstatistic', 'Stat\TeacherStatController@addStat')->middleware('is_teacher');
+Route::get('delstatistic/{id}', 'Stat\TeacherStatController@delStat')->middleware('is_teacher');
 
 // Request
-Route::get('request', 'Request\RequestController@showSelectTeacherForm');
+Route::get('showrequests', 'Request\RequestController@showRequests')->middleware('parent_request');
+Route::get('request', 'Request\RequestController@showSelectTeacherForm')->middleware('parent_request');
+Route::post('request', 'Request\RequestController@addRequest')->middleware('parent_request');
+Route::get('teacherrequests', 'Request\TeacherRequestController@showRequests')->middleware('is_teacher');
+Route::post('teacherrequests', 'Request\TeacherRequestController@updateRequest')->middleware('is_teacher');
 
 // No Permission Page
 Route::get('NoPermission', function () { return view('NoPermission'); });
 
 // Test
-
+Route::post('test', function () {
+    echo 'Test';
+});

@@ -40,22 +40,23 @@ trait UserCabinet
         switch ($roleName) {
             case 'student':
                 $menu = [
-                    'shedule'    => 'Shedule',
-                    'statistic' => 'Statistic'
+                    'shedule'   => 'Shedule',
+                    'statistic' => 'Statistic',
                     ];
                 break;
             case 'parent':
                 $menu = [
-                    'shedule'   => 'Shedule',
-                    'statistic' => 'Statistic',
-                    'request'   => 'Request'
+                    'shedule'       => 'Shedule',
+                    'statistic'     => 'Statistic',
+                    'showrequests'   => 'Show Requests',
+                    'request'       => 'Add Request',
                 ];
                 break;
             case 'teacher':
                 $menu = [
                     'shedule'       => 'Shedule',
                     'editstatistic' => 'Edit Statistic',
-                    'showrequests'  => 'Show Requests'
+                    'teacherrequests'  => 'Show Requests'
                 ];
                 break;
             case 'director':
