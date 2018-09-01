@@ -16,5 +16,9 @@ class VerifyCsrfToken extends Middleware
         'editstatistic',
         'updatestatistic/student/*/lesson/*',
         'teacherrequests',
+        'editshedule',
+        'addshedulelesson/*',
+        'directorstatistic',
+        'users',
     ];
 }

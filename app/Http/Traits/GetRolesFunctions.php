@@ -13,10 +13,30 @@ use App\Role;
 
 trait GetRolesFunctions
 {
+    /**
+     * @param string $roleName
+     * @return int
+     */
     public function getRoleIDByName(string $roleName) : int
     {
         $role = Role::where('name', $roleName)->pluck('id');
 
         return $role[0];
+    }
+
+    public function userNamesByRole (string $roleName) : array
+    {
+        $arrUsers = [];
+
+        $roleID = $this->getRoleIDByName($roleName);
+
+        $role = Role::find($roleID);
+        $users = $role->users;
+
+        foreach ($users as $user) {
+            $arrUsers[$user->id] = $user->first_name . ', ' . $user->last_name;
+        }
+
+        return $arrUsers;
     }
 }

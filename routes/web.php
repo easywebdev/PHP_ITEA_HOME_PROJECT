@@ -37,6 +37,11 @@ Route::post('register','Users\RegisterController@register');
 
 // Shedule
 Route::get('shedule', 'Shedule\SheduleController@getShedule');
+Route::get('editshedule', 'Shedule\DayLessonsController@showDaysLessons')->middleware('is_director');
+Route::post('editshedule', 'Shedule\DayLessonsController@updateLesson')->middleware('is_director');
+Route::get('addshedulelesson/{id}', 'Shedule\DayLessonsController@showAddLessonForm')->middleware('is_director');
+Route::post('addshedulelesson/{id}', 'Shedule\DayLessonsController@addLesson')->middleware('is_director');
+Route::get('delshedule/day/{dayID}/dellesson/{lesonID}/position/{positionID}', 'Shedule\DayLessonsController@delLesson')->middleware('is_director');
 
 // Stat
 Route::get('statistic/{id}', 'Stat\StatController@showUserStat')->middleware('stat_user');
@@ -47,6 +52,8 @@ Route::post('updatestatistic/student/{studentID}/lesson/{lessonID}', 'Stat\Teach
 Route::get('updatestatistic/student/{studentID}/lesson/{lessonID}/addstatistic', 'Stat\TeacherStatController@showAddStatForm')->middleware('is_teacher');
 Route::post('updatestatistic/student/{studentID}/lesson/{lessonID}/addstatistic', 'Stat\TeacherStatController@addStat')->middleware('is_teacher');
 Route::get('delstatistic/{id}', 'Stat\TeacherStatController@delStat')->middleware('is_teacher');
+Route::get('directorstatistic', 'Stat\DirectorStatController@showStatForm')->middleware('is_director');
+Route::post('directorstatistic', 'Stat\DirectorStatController@showStat')->middleware('is_director');
 
 // Request
 Route::get('showrequests', 'Request\RequestController@showRequests')->middleware('parent_request');
@@ -54,6 +61,10 @@ Route::get('request', 'Request\RequestController@showSelectTeacherForm')->middle
 Route::post('request', 'Request\RequestController@addRequest')->middleware('parent_request');
 Route::get('teacherrequests', 'Request\TeacherRequestController@showRequests')->middleware('is_teacher');
 Route::post('teacherrequests', 'Request\TeacherRequestController@updateRequest')->middleware('is_teacher');
+
+// Users
+Route::get('users', 'Users\DirectorUserController@showUsersForm')->middleware('is_director');
+Route::post('users', 'Users\DirectorUserController@updateUsers')->middleware('is_director');
 
 // No Permission Page
 Route::get('NoPermission', function () { return view('NoPermission'); });

@@ -61,10 +61,10 @@ trait UserCabinet
                 break;
             case 'director':
                 $menu = [
-                    'editshedule'   => 'Edit shedule',
-                    'statistic'     => 'Statistic',
-                    'showrequests'  => 'Show Requests',
-                    'users'         => 'Users'
+                    'editshedule'           => 'Edit shedule',
+                    'directorstatistic'     => 'Manage Statistic',
+                    'showrequests'          => 'Show Requests',
+                    'users'                 => 'Users'
                 ];
                 break;
         }

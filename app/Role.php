@@ -29,6 +29,6 @@ class Role extends Model
 
     public function users()
     {
-        return $this->hasMany('App\User', 'roles_id');
+        return $this->hasMany('App\User', 'roles_id')->orderBy('last_name');
     }
 }
