@@ -63,7 +63,7 @@ trait UserCabinet
                 $menu = [
                     'editshedule'           => 'Edit shedule',
                     'directorstatistic'     => 'Manage Statistic',
-                    'showrequests'          => 'Show Requests',
+                    'directorrequests'          => 'Show Requests',
                     'users'                 => 'Users'
                 ];
                 break;

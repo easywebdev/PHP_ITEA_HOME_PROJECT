@@ -61,6 +61,9 @@ Route::get('request', 'Request\RequestController@showSelectTeacherForm')->middle
 Route::post('request', 'Request\RequestController@addRequest')->middleware('parent_request');
 Route::get('teacherrequests', 'Request\TeacherRequestController@showRequests')->middleware('is_teacher');
 Route::post('teacherrequests', 'Request\TeacherRequestController@updateRequest')->middleware('is_teacher');
+Route::get('directorrequests', 'Request\DirectorRequestController@showRequestForm')->middleware('is_director');
+Route::post('directorrequests', 'Request\DirectorRequestController@showRequests')->middleware('is_director');
+Route::get('deleterequest/{id}', 'Request\DirectorRequestController@delRequest')->middleware('is_director');
 
 // Users
 Route::get('users', 'Users\DirectorUserController@showUsersForm')->middleware('is_director');

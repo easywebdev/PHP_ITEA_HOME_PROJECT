@@ -20,5 +20,6 @@ class VerifyCsrfToken extends Middleware
         'addshedulelesson/*',
         'directorstatistic',
         'users',
+        'directorrequests',
     ];
 }
