@@ -2,12 +2,16 @@
 
 @section('content')
     <div class="container">
-        <div class="card-header">
+        <div class="card-header mb-20px">
             Statistic for {{$studentName}} ; Lesson: {{$lessonName}}
         </div>
 
+        <div class="card-header mb-20px">
+            <a href="/home">HOME</a>
+        </div>
+
         <div class="row">
-            <a href="{{$_SERVER['REQUEST_URI']}}/addstatistic">Add</a>
+            <a href="{{$_SERVER['REQUEST_URI']}}/addstatistic" class="btn btn-primary">Add</a>
         </div>
 
         <hr/>
@@ -46,7 +50,7 @@
         <hr/>
 
         <div class="row">
-            <a href="{{$_SERVER['REQUEST_URI']}}/addstatistic">Add</a>
+            <a href="{{$_SERVER['REQUEST_URI']}}/addstatistic" class="btn btn-primary">Add</a>
         </div>
 
     </div>

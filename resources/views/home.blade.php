@@ -1,24 +1,21 @@
-<?php
-    var_dump(session()->all());
-?>
-
 @extends('layouts.app')
 
 @section('content')
 
-<div class="navbar navbar-laravel">
     <div class="container">
-        <div class="navbar-brand">
-            {{$user['first_name']}}&nbsp;{{$user['last_name']}}
-            @if($roleName == 'parent')
-                parent of ({{session('childFirstName')}} &nbsp; {{session('childLastName')}})
-            @endif
+        <div class="card-header row mb-20px">
+            <div class="col-6">
+                {{$user['first_name']}}&nbsp;{{$user['last_name']}}
+                @if($roleName == 'parent')
+                    parent of ({{session('childFirstName')}} &nbsp; {{session('childLastName')}})
+                @endif
+            </div>
+            <div class="col-3">
+                {{$roleName}}
+            </div>
         </div>
-        <div class="nav-item">
-            {{$roleName}}
-        </div>
+
     </div>
-</div>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -55,7 +52,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+
                 </div>
 
                 <div class="card-body">

@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    Teacher Form:
     <div class="container">
+        <div class="card-header mb-20px">
+            Teacher Form:
+        </div>
+
         <form method="POST" action="">
 
             <div class="form-group row justify-content-start">

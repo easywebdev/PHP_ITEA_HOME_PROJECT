@@ -46,8 +46,8 @@ class DirectorStatController extends Controller
         foreach ($students as $key => $value) {
             $stats = Stat::where('users_id', $key)->where('lessons_id', $request->post('lessonID'))->get();
 
-            foreach ($stats as $stat) {
-                $statData = [
+            foreach ($stats as $statID => $stat) {
+                $statData[$statID] = [
                     'rating' => $stat->rating,
                     'created' => $stat->created_at,
                     'updated' => $stat->updated_at,

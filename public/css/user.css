@@ -1,0 +1,25 @@
+.user-block {
+    background-color: #dddddd;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+    .user-block:nth-child(3) {
+        margin-right: 0px;
+    }
+
+.user-block__header {
+    background-color: #155724;
+    padding: 5px;
+    color: white;
+    font-weight: 800;
+}
+
+.mb-20px {
+    margin-bottom: 20px;
+}
+
+.pading-10 {
+    padding: 10px;
+    box-sizing: border-box;
+}

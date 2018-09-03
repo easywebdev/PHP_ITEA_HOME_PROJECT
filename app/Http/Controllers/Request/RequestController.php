@@ -80,8 +80,9 @@ class RequestController extends Controller
 
     /**
      * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function addRequest(Request $request) : void
+    public function addRequest(Request $request)
     {
         $this->validatePost($request);
 
@@ -95,7 +96,7 @@ class RequestController extends Controller
             'meetings_id' => $meetings_id,
         ]);
 
-        echo 'Post ADD';
+        return redirect('showrequests');
     }
 
     public function showRequests()

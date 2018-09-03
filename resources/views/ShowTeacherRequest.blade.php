@@ -3,11 +3,23 @@
 @section('content')
     <div class="container">
 
-        <div class="card-header">
+        <div class="card-header mb-20px">
             Teacher Request:
         </div>
 
+        <div class="card-header mb-20px">
+            <a href="/home">HOME</a>
+        </div>
+
         <div class="card-body">
+            <div class="row user-block__header mb-20px">
+                <div class="col-2">Name</div>
+                <div class="col-2">Topic</div>
+                <div class="col-2">Created</div>
+                <div class="col-2">Updated</div>
+                <div class="col-2">Status</div>
+                <div class="col-2"> Action</div>
+            </div>
             @foreach($meetings as $key => $value)
                 <form method="POST" action="">
                     <input type="hidden" name="meetingID" value="{{$key}}">

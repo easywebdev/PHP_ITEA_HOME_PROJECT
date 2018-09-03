@@ -1,11 +1,18 @@
-<?php
-    print_r(session()->all());
-?>
-
 @extends('layouts.app')
 
 @section('content')
-Select Teacher Form:
+    <div class="container">
+        <div class="card-header mb-20px">
+            Select Teacher Form:
+        </div>
+
+        @if($_SERVER['HTTP_REFERER'])
+            <div class="card-header mb-20px">
+                <a href="{{$_SERVER['HTTP_REFERER']}}">HOME</a>
+            </div>
+        @endif
+    </div>
+
     <div>
         <form method="POST" action="">
 
@@ -48,7 +55,9 @@ Select Teacher Form:
 
     <div>
         <?php
+        if(count($errors) != 0) {
             print_r($errors);
+        }
         ?>
     </div>
 @endsection

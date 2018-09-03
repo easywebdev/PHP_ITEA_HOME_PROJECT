@@ -2,8 +2,12 @@
 
 @section('content')
     <div class="container">
-        <div class="card-header">
+        <div class="card-header mb-20px">
             Select Request:
+        </div>
+
+        <div class="card-header mb-20px">
+            <a href="/home">HOME</a>
         </div>
 
         <div class="row">

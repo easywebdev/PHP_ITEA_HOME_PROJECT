@@ -107,7 +107,6 @@ class TeacherStatController extends Controller
         $studensData = $this->createArrIdField($students, ['first_name', 'last_name'], ', ');
 
         $lessons = $this->getLessons(session('userID'));
-        print_r($lessons);
 
         return View('TeacherStatForm', [
             'students' => $studensData,

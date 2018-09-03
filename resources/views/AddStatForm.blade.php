@@ -3,8 +3,19 @@
 @section('content')
     <div class="container">
 
-        <div class="card-header">
+        <div class="card-header mb-20px">
             Add Stat for student: {{$studentName}} and lesson: {{$lessonName}}
+        </div>
+
+        <div class="card-header mb-20px row">
+            <div class="col-1">
+                <a href="/home">HOME</a>
+            </div>
+            @if($_SERVER['HTTP_REFERER'])
+                <div class="col-1">
+                    <a href="{{$_SERVER['HTTP_REFERER']}}">BACK</a>
+                </div>
+            @endif
         </div>
 
         <div class="card-body">
