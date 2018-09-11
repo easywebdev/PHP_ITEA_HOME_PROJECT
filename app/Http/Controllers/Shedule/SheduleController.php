@@ -14,11 +14,6 @@ class SheduleController extends HomeController
 {
     public function getShedule(): View
     {
-//        $shedule = $this->ge
-//
-//        return view('shedule', [
-//            'shedule' => $shedule
-//        ]);
         return $this->showShedule();
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\GetRolesFunctions;
+use App\Lesson;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -13,6 +15,8 @@ use Illuminate\Http\Request;
  */
 class DirectorUserController extends Controller
 {
+    use GetRolesFunctions;
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -20,6 +24,8 @@ class DirectorUserController extends Controller
     {
         $arrRoles = [];
         $arrUsers = [];
+        $arrStudents = [];
+        $arrLessons = [];
 
         $roles = Role::all();
         foreach ($roles as $role) {
@@ -34,9 +40,18 @@ class DirectorUserController extends Controller
             ];
         }
 
+        $arrStudents = $this->userNamesByRole('student');
+
+        $lessons = Lesson::all()->sortBy('name');
+        foreach ($lessons as $lesson) {
+            $arrLessons[$lesson->id] = $lesson->name;
+        }
+
         return View('ShowDirectorUsersForm', [
             'roles' => $arrRoles,
             'users' => $arrUsers,
+            'students' => $arrStudents,
+            'lessons' => $arrLessons,
         ]);
     }
 
@@ -46,10 +61,16 @@ class DirectorUserController extends Controller
      */
     public function updateUsers(Request $request)
     {
+        print_r($request->post());
+
         foreach ($request->post() as $key => $value) {
-            User::where('id', $key)->update([
-                'roles_id' => $value,
-            ]);
+
+            if($key != 'children' && $key != 'lesson') {
+                User::where('id', $key)->update([
+                    'roles_id' => $value,
+                ]);
+            }
+
         }
 
         return redirect('users');

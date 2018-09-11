@@ -10,20 +10,35 @@
             <a href="/home">HOME</a>
         </div>
 
-        <div class="row">
+        <div class="">
             <form method="POST" action="">
                 @foreach($users as $userID => $userData)
                     <div class="row">
                         <!--<input type="hidden" name="userID_{{$userID}}" value="{{$userID}}">-->
-                        <div class="col-8">
+                        <div class="col-4">
                             {{$userData['name']}}
                         </div>
-                        <div class="col-4">
+                        <div class="col-3">
                             <select id="roleID" name="{{$userID}}">
                                 @foreach($roles as $key => $value)
                                     <option value="{{$key}}" @if($key == $userData['roles_id']) selected @endif>{{$value}}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="col-5">
+                            @if($roles[$userData['roles_id']] == 'parent')
+                                <select name="children">
+                                    @foreach($students as $studentID => $studentName)
+                                        <option value="{{$studentID}}">{{$studentName}}</option>
+                                    @endforeach
+                                </select>
+                            @elseif($roles[$userData['roles_id']] == 'teacher')
+                                <select name="lesson">
+                                    @foreach($lessons as $lessonID => $lessonName)
+                                        <option value="{{$lessonID}}">{{$lessonName}}</option>
+                                    @endforeach
+                                </select>
+                            @endif
                         </div>
                     </div>
                 @endforeach

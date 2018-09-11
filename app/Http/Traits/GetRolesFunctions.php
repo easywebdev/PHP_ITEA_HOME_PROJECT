@@ -24,6 +24,10 @@ trait GetRolesFunctions
         return $role[0];
     }
 
+    /**
+     * @param string $roleName
+     * @return array
+     */
     public function userNamesByRole (string $roleName) : array
     {
         $arrUsers = [];
