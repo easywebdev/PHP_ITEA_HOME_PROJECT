@@ -30,4 +30,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function meetings()
+    {
+        return $this->belongsToMany('App\Meeting', 'users_meetings', 'users_id', 'meetings_id');
+    }
+
+    /**
+     *
+     */
+    public function lessons()
+    {
+        return $this->belongsToMany('App\Lesson', 'lessons_users', 'users_id', 'lessons_id');
+    }
 }

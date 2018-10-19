@@ -26,6 +26,11 @@ class HomeController extends Controller
     public $workDays = [];
 
     /**
+     * @var array
+     */
+    public $sheduler = [];
+
+    /**
      * HomeController constructor.
      * @param ShedulerModel $model
      */
@@ -41,12 +46,10 @@ class HomeController extends Controller
     }
 
     /**
-     * @return View
+     *
      */
-    public function getShedule() : View
+    private function getShedule() : void
     {
-        $sheduler = [];
-
         foreach ($this->workDays as $key => $value) {
             $arrLessons = [];
 
@@ -56,13 +59,21 @@ class HomeController extends Controller
                 $arrLessons[] = $lesson->name;
             }
 
-            $sheduler[$value] = $arrLessons;
+            $this->sheduler[$value] = $arrLessons;
 
         }
+    }
+
+    /**
+     * @return View
+     */
+    public function showShedule() : View
+    {
+        $this->getShedule();
 
         return view('Home', [
             'title' => 'Shedule',
-            'sheduler' => $sheduler,
+            'sheduler' => $this->sheduler,
         ]);
     }
 }
